@@ -1,3 +1,9 @@
+'''
+Egor Mikhaylov
+04/23/2024
+'''
+
+
 # pdf_processing.py
 
 # Necessary imports
@@ -47,6 +53,7 @@ class DocumentProcessor:
             # Allow only type `pdf`
             # Allow multiple PDFs for ingestion
             #####################################
+            "Upload your PDF files", type=["pdf"], accept_multiple_files=True
         )
         
         if uploaded_files is not None:
@@ -66,8 +73,10 @@ class DocumentProcessor:
                 # Use PyPDFLoader here to load the PDF and extract pages.
                 # https://python.langchain.com/docs/modules/data_connection/document_loaders/pdf#using-pypdf
                 # You will need to figure out how to use PyPDFLoader to process the temporary file.
+                loader = PyPDFLoader(temp_file_path)
                 
                 # Step 3: Then, Add the extracted pages to the 'pages' list.
+                self.pages = loader.load_and_split()
                 #####################################
                 
                 # Clean up by deleting the temporary file.

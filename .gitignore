@@ -4,3 +4,6 @@ __pycache__/
 application_key.json
 authentication.json
 ai-data.json
+
+# Tasks
+*_solution.py
