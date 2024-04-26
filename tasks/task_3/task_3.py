@@ -53,7 +53,9 @@ class DocumentProcessor:
             # Allow only type `pdf`
             # Allow multiple PDFs for ingestion
             #####################################
-            "Upload your PDF files", type=["pdf"], accept_multiple_files=True
+            label="Upload your PDF files", 
+            type=["pdf"], 
+            accept_multiple_files=True
         )
         
         if uploaded_files is not None:
@@ -76,7 +78,8 @@ class DocumentProcessor:
                 loader = PyPDFLoader(temp_file_path)
                 
                 # Step 3: Then, Add the extracted pages to the 'pages' list.
-                self.pages = loader.load_and_split()
+                for page in loader.load_and_split():
+                    self.pages.append(page.page_content)
                 #####################################
                 
                 # Clean up by deleting the temporary file.
